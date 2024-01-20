@@ -10,7 +10,6 @@ import (
 	gormLogger "gorm.io/gorm/logger"
 )
 
-// DBPostgreOption options for postgre connection
 type DBPostgreOption struct {
 	Host            string
 	Port            int
@@ -56,6 +55,7 @@ func NewPostgreDatabase(option DBPostgreOption) (*gorm.DB, error) {
 	return db, nil
 }
 
+// getLoggerLevel return gorm log level setup based from env/config of the app
 func getLoggerLevel(v string) gormLogger.LogLevel {
 	switch v {
 	case "error":

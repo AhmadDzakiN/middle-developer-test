@@ -14,9 +14,8 @@ func init() {
 func readViperConfig() *viper.Viper {
 	v := viper.New()
 	v.AddConfigPath(".")
-	v.AddConfigPath("../../../params")
+	v.AddConfigPath("../../../../params")
 	v.AddConfigPath("./params")
-	v.AddConfigPath("/opt/middle-developer-test/params")
 	v.SetConfigName(".env")
 	v.SetConfigType("env")
 

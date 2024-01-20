@@ -20,7 +20,7 @@ var migrateUpCmd = &cobra.Command{
 		cfg := config.AppConfig()
 		appCtx := appcontext.NewAppContext(cfg)
 		logger := config.NewLogger()
-		mSource := getMigrateSource()
+		mSource := getMigrationSource()
 
 		doMigrate(appCtx, logger, mSource, appcontext.DBDialectPostgres, migrate.Up)
 	},
@@ -34,7 +34,7 @@ var migrateDownCmd = &cobra.Command{
 		cfg := config.AppConfig()
 		appCtx := appcontext.NewAppContext(cfg)
 		logger := config.NewLogger()
-		mSource := getMigrateSource()
+		mSource := getMigrationSource()
 
 		doMigrate(appCtx, logger, mSource, appcontext.DBDialectPostgres, migrate.Down)
 	},
@@ -59,7 +59,7 @@ func init() {
 	rootCmd.AddCommand(migrateNewCmd)
 }
 
-func getMigrateSource() migrate.FileMigrationSource {
+func getMigrationSource() migrate.FileMigrationSource {
 	source := migrate.FileMigrationSource{
 		Dir: "migrations/sql",
 	}

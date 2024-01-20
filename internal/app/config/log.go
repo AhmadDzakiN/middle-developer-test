@@ -11,11 +11,11 @@ func NewLogger() zerolog.Logger {
 	log.Logger = log.With().Caller().Logger()
 	zerolog.TimeFieldFormat = time.RFC3339
 
-	if os.Getenv("LOG_PRETTY") == "true" {
+	if AppConfig().GetBool("LOG_PRETTY") == true {
 		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr, FormatTimestamp: func(i interface{}) string { return time.Now().Format(time.RFC3339) }})
 	}
 
-	switch os.Getenv("LOG_LEVEL") {
+	switch AppConfig().GetString("LOG_LEVEL") {
 	case "debug":
 		zerolog.SetGlobalLevel(zerolog.DebugLevel)
 	case "info":
