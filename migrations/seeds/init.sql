@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS employees (
 );
 
 
-
 INSERT INTO employees (first_name, last_name, email, hire_date) VALUES ('Ajax', 'Zaher', 'Ajax_Zaher@email.com', '2023-02-12');
 INSERT INTO employees (first_name, last_name, email, hire_date) VALUES ('Djedefre', 'Narantsetseg', 'Djedefre_Narantsetseg@email.com', '2024-01-03');
 INSERT INTO employees (first_name, last_name, email, hire_date) VALUES ('Cynefrith', 'Acantha', 'Cynefrith_Acantha@email.com', '2018-07-10');

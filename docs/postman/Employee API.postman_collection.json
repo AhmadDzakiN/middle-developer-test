@@ -1,0 +1,873 @@
+{
+	"info": {
+		"_postman_id": "8ad368c1-fe05-4244-97e2-25d6fdee02c5",
+		"name": "Employee API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5740548",
+		"_collection_link": "https://www.postman.com/ahmaddzakin/workspace/middle-developer-test/collection/5740548-8ad368c1-fe05-4244-97e2-25d6fdee02c5?action=share&source=collection_link&creator=5740548"
+	},
+	"item": [
+		{
+			"name": "Get All Employee",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 - Get All Employee",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 200,\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"first_name\": \"Ajax\",\n            \"last_name\": \"Zaher\",\n            \"email\": \"Ajax_Zaher@email.com\",\n            \"hire_date\": \"2023-02-12T00:00:00Z\"\n        },\n        {\n            \"id\": 2,\n            \"first_name\": \"Djedefre\",\n            \"last_name\": \"Narantsetseg\",\n            \"email\": \"Djedefre_Narantsetseg@email.com\",\n            \"hire_date\": \"2024-01-03T00:00:00Z\"\n        },\n        {\n            \"id\": 3,\n            \"first_name\": \"Cynefrith\",\n            \"last_name\": \"Acantha\",\n            \"email\": \"Cynefrith_Acantha@email.com\",\n            \"hire_date\": \"2018-07-10T00:00:00Z\"\n        },\n        {\n            \"id\": 4,\n            \"first_name\": \"Nymphas\",\n            \"last_name\": \"Sarnai\",\n            \"email\": \"Nymphas_Sarnai@email.com\",\n            \"hire_date\": \"2016-10-09T00:00:00Z\"\n        },\n        {\n            \"id\": 5,\n            \"first_name\": \"Shaindel\",\n            \"last_name\": \"Garbine\",\n            \"email\": \"Shaindel_Garbine@email.com\",\n            \"hire_date\": \"2019-07-17T00:00:00Z\"\n        },\n        {\n            \"id\": 6,\n            \"first_name\": \"Zsiga\",\n            \"last_name\": \"Heracles\",\n            \"email\": \"Zsiga_Heracles@email.com\",\n            \"hire_date\": \"2016-03-12T00:00:00Z\"\n        },\n        {\n            \"id\": 7,\n            \"first_name\": \"Jaylin\",\n            \"last_name\": \"Dominika\",\n            \"email\": \"Jaylin_Dominika@email.com\",\n            \"hire_date\": \"2017-08-23T00:00:00Z\"\n        },\n        {\n            \"id\": 8,\n            \"first_name\": \"Noodin\",\n            \"last_name\": \"Yazhu\",\n            \"email\": \"Noodin_Yazhu@email.com\",\n            \"hire_date\": \"2019-06-10T00:00:00Z\"\n        },\n        {\n            \"id\": 9,\n            \"first_name\": \"Kolab\",\n            \"last_name\": \"Lapo\",\n            \"email\": \"Kolab_Lapo@email.com\",\n            \"hire_date\": \"2011-03-21T00:00:00Z\"\n        },\n        {\n            \"id\": 10,\n            \"first_name\": \"Iepthae\",\n            \"last_name\": \"Ezra\",\n            \"email\": \"Iepthae_Ezra@email.com\",\n            \"hire_date\": \"2020-09-25T00:00:00Z\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "404 - Get All Employee",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 404,\n    \"status\": \"error\",\n    \"message\": \"Employee data is not found\"\n}"
+				},
+				{
+					"name": "500 - Get All Employee",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 500,\n    \"status\": \"error\",\n    \"message\": \"Ups, something wrong with the server. Please try again later\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Employee By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/employees/:employee_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"employees",
+						":employee_id"
+					],
+					"variable": [
+						{
+							"key": "employee_id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 - Get Employee By ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/employees/:employee_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees",
+								":employee_id"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 200,\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": 2,\n            \"first_name\": \"Djedefre\",\n            \"last_name\": \"Narantsetseg\",\n            \"email\": \"Djedefre_Narantsetseg@email.com\",\n            \"hire_date\": \"2024-01-03T00:00:00Z\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "400 - Get Employee By ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/employees/:employee_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees",
+								":employee_id"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "invalid"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 400,\n    \"status\": \"error\",\n    \"message\": \"Empty or invalid request\"\n}"
+				},
+				{
+					"name": "404 - Get Employee By ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/employees/:employee_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees",
+								":employee_id"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 404,\n    \"status\": \"error\",\n    \"message\": \"Employee data is not found\"\n}"
+				},
+				{
+					"name": "500 - Get Employee By ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/employees/:employee_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees",
+								":employee_id"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 500,\n    \"status\": \"error\",\n    \"message\": \"Ups, something wrong with the server. Please try again later\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"email\": \"john_doe32@email.com\",\n    \"hire_date\": \"2012-03-21\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/employees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"employees"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 - Create Employee",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"email\": \"john_doe32@email.com\",\n    \"hire_date\": \"2012-03-21\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 200,\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": 15,\n            \"first_name\": \"John\",\n            \"last_name\": \"Doe\",\n            \"email\": \"john_doe32@email.com\",\n            \"hire_date\": \"2012-03-21T00:00:00Z\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "400 - Create Employee",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"email\": \"john_doe32@email.com\",\n    \"hire_date\": \"2012-03-21\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 400,\n    \"status\": \"error\",\n    \"message\": \"Empty or invalid request\"\n}"
+				},
+				{
+					"name": "500 - Create Employee",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"email\": \"john_doe32@email.com\",\n    \"hire_date\": \"2012-03-21\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/employees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 500,\n    \"status\": \"error\",\n    \"message\": \"Ups, something wrong with the server. Please try again later\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update Employee By ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"first_name\": \"Mike\",\n    \"last_name\": \"Wazowski\",\n    \"email\": \"mike_wazowski10@email.com\",\n    \"hire_date\": \"2020-10-03\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/employees/:employee_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"employees",
+						":employee_id"
+					],
+					"variable": [
+						{
+							"key": "employee_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 - Update Employee By ID",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Mike\",\n    \"last_name\": \"Wazowski\",\n    \"email\": \"mike_wazowski@email.com\",\n    \"hire_date\": \"2020-10-03\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/employees/:employee_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees",
+								":employee_id"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 200,\n    \"status\": \"success\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"first_name\": \"Mike\",\n            \"last_name\": \"Wazowski\",\n            \"email\": \"mike_wazowski10@email.com\",\n            \"hire_date\": \"2020-10-03T00:00:00Z\"\n        }\n    ]\n}"
+				},
+				{
+					"name": "400 - Update Employee By ID",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Mike\",\n    \"last_name\": \"Wazowski\",\n    \"email\": \"mike_wazowski10@email.com\",\n    \"hire_date\": \"2020-10-03\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/employees/:employee_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees",
+								":employee_id"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "invalid"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 400,\n    \"status\": \"error\",\n    \"message\": \"Empty or invalid request\"\n}"
+				},
+				{
+					"name": "404 - Update Employee By ID",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Mike\",\n    \"last_name\": \"Wazowski\",\n    \"email\": \"mike_wazowski10@email.com\",\n    \"hire_date\": \"2020-10-03\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/employees/:employee_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees",
+								":employee_id"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 404,\n    \"status\": \"error\",\n    \"message\": \"Employee data is not found\"\n}"
+				},
+				{
+					"name": "500 - Update Employee By ID",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"first_name\": \"Mike\",\n    \"last_name\": \"Wazowski\",\n    \"email\": \"mike_wazowski10@email.com\",\n    \"hire_date\": \"2020-10-03\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/employees/:employee_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees",
+								":employee_id"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 500,\n    \"status\": \"error\",\n    \"message\": \"Ups, something wrong with the server. Please try again later\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete Employee By ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/employees/:employee_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"employees",
+						":employee_id"
+					],
+					"variable": [
+						{
+							"key": "employee_id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "200 - Delete Employee By ID",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/employees/:employee_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees",
+								":employee_id"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 200,\n    \"status\": \"success\",\n    \"data\": []\n}"
+				},
+				{
+					"name": "400 - Delete Employee By ID",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/employees/:employee_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees",
+								":employee_id"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "invalid"
+								}
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 400,\n    \"status\": \"error\",\n    \"message\": \"Empty or invalid request\"\n}"
+				},
+				{
+					"name": "404 - Delete Employee By ID",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/employees/:employee_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees",
+								":employee_id"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 404,\n    \"status\": \"error\",\n    \"message\": \"Employee data is not found\"\n}"
+				},
+				{
+					"name": "500 - Delete Employee By ID",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/employees/:employee_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"employees",
+								":employee_id"
+							],
+							"variable": [
+								{
+									"key": "employee_id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status_code\": 500,\n    \"status\": \"error\",\n    \"message\": \"Ups, something wrong with the server. Please try again later\"\n}"
+				}
+			]
+		}
+	]
+}
