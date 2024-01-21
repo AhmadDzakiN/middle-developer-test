@@ -42,7 +42,7 @@ func (s *ServiceTestSuite) SetupTest() {
 		},
 	}
 
-	loc, _ := time.LoadLocation("Asia/Jakarta")
+	loc, _ := time.LoadLocation("UTC")
 	s.loc = loc
 
 	s.ctx = context.Background()
@@ -185,6 +185,79 @@ func (s *ServiceTestSuite) TestGetByID() {
 			test.fields.mock(test.args.ctx, test.args.ID)
 
 			actualResult, actualErr := s.serviceMock.GetByID(test.args.ctx, test.args.ID)
+
+			assert.Equal(s.T(), test.expectedErr, actualErr, test.name)
+			assert.Equal(s.T(), test.expectedResult, actualResult, test.name)
+		})
+	}
+}
+
+func (s *ServiceTestSuite) TestCreate() {
+	type args struct {
+		ctx         context.Context
+		employeeReq model.EmployeePayload
+	}
+
+	type fields struct {
+		mock func(ctx context.Context, employee *model.Employee)
+	}
+
+	employeeReq := model.EmployeePayload{
+		FirstName: "John",
+		LastName:  "Doe",
+		Email:     "john_doe@gmail.com",
+		HireDate:  "2020-01-03",
+	}
+
+	employeeModel := model.Employee{
+		FirstName: "John",
+		LastName:  "Doe",
+		Email:     "john_doe@gmail.com",
+		HireDate:  time.Date(2020, 01, 03, 00, 00, 00, 00, s.loc),
+	}
+
+	tests := []struct {
+		name           string
+		args           args
+		fields         fields
+		expectedResult model.Employee
+		expectedErr    error
+	}{
+		{
+			name: "Success",
+			args: args{
+				ctx:         s.ctx,
+				employeeReq: employeeReq,
+			},
+			fields: fields{
+				mock: func(ctx context.Context, employee *model.Employee) {
+					s.employeeRepoMock.EXPECT().Create(ctx, employee).Return(nil)
+				},
+			},
+			expectedResult: employeeModel,
+			expectedErr:    nil,
+		},
+		{
+			name: "Failed create new Employee data from repo",
+			args: args{
+				ctx:         s.ctx,
+				employeeReq: employeeReq,
+			},
+			fields: fields{
+				mock: func(ctx context.Context, employee *model.Employee) {
+					s.employeeRepoMock.EXPECT().Create(ctx, employee).Return(errors.New("random error"))
+				},
+			},
+			expectedResult: model.Employee{},
+			expectedErr:    errors.New("random error"),
+		},
+	}
+
+	for _, test := range tests {
+		s.Suite.Run(test.name, func() {
+			test.fields.mock(test.args.ctx, &employeeModel)
+
+			actualResult, actualErr := s.serviceMock.Create(test.args.ctx, test.args.employeeReq)
 
 			assert.Equal(s.T(), test.expectedErr, actualErr, test.name)
 			assert.Equal(s.T(), test.expectedResult, actualResult, test.name)

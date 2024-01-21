@@ -1,6 +1,7 @@
 package employee
 
 import (
+	"bytes"
 	"context"
 	"errors"
 	"fmt"
@@ -48,7 +49,7 @@ func (h *HandlerTestSuite) SetupTest() {
 		},
 	}
 
-	loc, _ := time.LoadLocation("Asia/Jakarta")
+	loc, _ := time.LoadLocation("UTC")
 	h.loc = loc
 
 	h.handlerMock = Handler{
@@ -190,6 +191,117 @@ func (h *HandlerTestSuite) TestGetByID() {
 			test.fields.mock(employeeID)
 
 			handler := builder.HttpHandler{H: h.handlerMock.GetByID}
+			handler.ServeHTTP(writer, req)
+
+			assert.Equal(h.T(), test.expectedStatusCode, writer.Code)
+		})
+	}
+}
+
+func (h *HandlerTestSuite) TestCreate() {
+	employeeData := model.Employee{
+		ID:        1,
+		FirstName: "John",
+		LastName:  "Doe",
+		Email:     "john_doe@gmail.com",
+		HireDate:  time.Date(2020, 01, 03, 00, 00, 00, 00, h.loc),
+	}
+
+	type args struct {
+		reqBody []byte
+	}
+
+	type fields struct {
+		mock func()
+	}
+
+	tests := []struct {
+		name               string
+		args               args
+		fields             fields
+		expectedStatusCode int
+	}{
+		{
+			name: "Success",
+			args: args{
+				reqBody: []byte(`{
+					"first_name": "John",
+					"last_name": "Doe",
+					"email": "john_doe@gmail.com",
+					"hire_date": "2010-01-03"
+				}`),
+			},
+			fields: fields{
+				mock: func() {
+					h.employeeSvcMock.EXPECT().Create(gomock.Any(), model.EmployeePayload{
+						FirstName: "John",
+						LastName:  "Doe",
+						Email:     "john_doe@gmail.com",
+						HireDate:  "2010-01-03",
+					}).Return(employeeData, nil)
+				}},
+			expectedStatusCode: http.StatusOK,
+		},
+		{
+			name: "Failed, got error from service",
+			args: args{
+				reqBody: []byte(`{
+					"first_name": "John",
+					"last_name": "Doe",
+					"email": "john_doe@gmail.com",
+					"hire_date": "2010-01-03"
+				}`),
+			},
+			fields: fields{
+				mock: func() {
+					h.employeeSvcMock.EXPECT().Create(gomock.Any(), model.EmployeePayload{
+						FirstName: "John",
+						LastName:  "Doe",
+						Email:     "john_doe@gmail.com",
+						HireDate:  "2010-01-03",
+					}).Return(model.Employee{}, errors.New("random error"))
+				}},
+			expectedStatusCode: http.StatusInternalServerError,
+		},
+		{
+			name: "Failed, missing first name field",
+			args: args{
+				reqBody: []byte(`{
+					"last_name": "Doe",
+					"email": "john_doe@gmail.com",
+					"hire_date": "2010-01-03"
+				}`),
+			},
+			fields: fields{
+				mock: func() {}},
+			expectedStatusCode: http.StatusBadRequest,
+		},
+		{
+			name: "Failed, not a valid json",
+			args: args{
+				reqBody: []byte(`{
+					"first_name": "John",
+					"last_name": "Doe",
+					"email": "john_doe@gmail.com",
+					"hire_date": "2010-01-03",
+				}`),
+			},
+			fields: fields{
+				mock: func() {}},
+			expectedStatusCode: http.StatusBadRequest,
+		},
+	}
+
+	for _, test := range tests {
+		h.Suite.Run(test.name, func() {
+			ctx := chi.NewRouteContext()
+			req, _ := http.NewRequest(http.MethodPost, "/employees", bytes.NewBuffer(test.args.reqBody))
+			req = req.WithContext(context.WithValue(req.Context(), chi.RouteCtxKey, ctx))
+
+			writer := httptest.NewRecorder()
+			test.fields.mock()
+
+			handler := builder.HttpHandler{H: h.handlerMock.Create}
 			handler.ServeHTTP(writer, req)
 
 			assert.Equal(h.T(), test.expectedStatusCode, writer.Code)

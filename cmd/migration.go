@@ -76,13 +76,24 @@ func doMigrate(appCtx *appcontext.AppContext, log zerolog.Logger, mSource migrat
 
 	dbObj, _ := db.DB()
 
-	total, err := migrate.Exec(dbObj, dbDialect, mSource, direction)
-	if err != nil {
-		log.Fatal().Msgf("Error migrate %s DB | Error: %+v", err)
+	var (
+		errMigrate    error
+		totalMigrated int
+	)
+
+	if direction == migrate.Up {
+		totalMigrated, errMigrate = migrate.Exec(dbObj, dbDialect, mSource, direction)
+	} else {
+		totalMigrated, errMigrate = migrate.ExecMax(dbObj, dbDialect, mSource, direction, 1)
+	}
+
+	if errMigrate != nil {
+		log.Fatal().Msgf("Error migrate %s DB | Error: %+v", dbDialect, errMigrate)
+		err = errMigrate
 		return err
 	}
 
-	log.Info().Msgf("Success migrate DB | Total: %d", total)
+	log.Info().Msgf("Success migrate DB | Total: %d", totalMigrated)
 	return nil
 }
 

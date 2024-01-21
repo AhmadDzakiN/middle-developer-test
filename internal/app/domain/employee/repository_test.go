@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"github.com/DATA-DOG/go-sqlmock"
-	"github.com/magiconair/properties/assert"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -40,7 +40,7 @@ func (r *RepositoryTestSuite) SetupTest() {
 			DbPostgre: gormdb,
 		}}
 
-	loc, _ := time.LoadLocation("Asia/Jakarta")
+	loc, _ := time.LoadLocation("UTC")
 	r.loc = loc
 
 	r.ctx = context.Background()
@@ -144,7 +144,7 @@ func (r *RepositoryTestSuite) TestGetAll() {
 
 func (r *RepositoryTestSuite) TestGetByID() {
 	type fields struct {
-		mock func(employeeID uint64)
+		mock func(ID uint64)
 	}
 
 	type args struct {
@@ -221,6 +221,77 @@ func (r *RepositoryTestSuite) TestGetByID() {
 
 			assert.Equal(r.T(), test.expectedErr, actualErr, test.name)
 			assert.Equal(r.T(), test.expectedResult, actualResult, test.name)
+		})
+	}
+}
+
+func (r *RepositoryTestSuite) TestCreate() {
+	type fields struct {
+		mock func(employee model.Employee)
+	}
+
+	type args struct {
+		ctx      context.Context
+		employee *model.Employee
+	}
+
+	employee := model.Employee{
+		FirstName: "John",
+		LastName:  "Doe",
+		Email:     "john_doe@example.com",
+		HireDate:  time.Date(2020, 01, 03, 00, 00, 00, 00, r.loc),
+	}
+
+	query := `INSERT INTO employees (first_name,last_name,email,hire_date) VALUES ($1,$2,$3,$4) RETURNING id`
+
+	tests := []struct {
+		name        string
+		args        args
+		fields      fields
+		expectedErr error
+	}{
+		{
+			name: "Success",
+			args: args{
+				ctx:      r.ctx,
+				employee: &employee,
+			},
+			fields: fields{
+				mock: func(employee model.Employee) {
+					r.sqlMock.ExpectBegin()
+					r.sqlMock.ExpectQuery(query).
+						WithArgs(employee.FirstName, employee.LastName, employee.Email, employee.HireDate).
+						WillReturnRows(sqlmock.NewRows([]string{"id"}).AddRow(1))
+					r.sqlMock.ExpectCommit()
+				},
+			},
+			expectedErr: nil,
+		},
+		//{
+		//	name: "Failed, theres an error in db",
+		//	args: args{
+		//		ctx:      r.ctx,
+		//		employee: &employee,
+		//	},
+		//	fields: fields{
+		//		mock: func(employee model.Employee) {
+		//			r.sqlMock.ExpectBegin()
+		//			r.sqlMock.ExpectQuery(query).
+		//				WithArgs(employee.FirstName, employee.LastName, employee.Email, employee.HireDate).
+		//				WillReturnError(gorm.ErrUnsupportedDriver)
+		//			//r.sqlMock.ExpectRollback()
+		//		}},
+		//	expectedErr: gorm.ErrUnsupportedDriver,
+		//},
+	}
+
+	for _, test := range tests {
+		r.Suite.Run(test.name, func() {
+			test.fields.mock(*test.args.employee)
+
+			actualError := r.repositoryMock.Create(test.args.ctx, test.args.employee)
+
+			assert.Equal(r.T(), test.expectedErr, actualError)
 		})
 	}
 

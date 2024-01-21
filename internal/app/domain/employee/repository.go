@@ -52,8 +52,7 @@ func (r *repository) GetByID(ctx context.Context, ID uint64) (employee model.Emp
 }
 
 func (r *repository) Create(ctx context.Context, employee *model.Employee) (err error) {
-	db := r.opt.DbPostgre.WithContext(ctx).Session(&gorm.Session{PrepareStmt: true})
-	result := db.Create(&employee)
+	result := r.opt.DbPostgre.WithContext(ctx).Create(&employee)
 	if result.Error != nil {
 		err = result.Error
 		return
