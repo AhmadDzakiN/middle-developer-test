@@ -1,7 +1,7 @@
 # Employee API 
 An Employee API by Ahmad Dzaki Naufal for mid-developer-test
 
-## For more detailed information, please see this
+## For more detailed information, please see docs/Employee API Documentation.pdf file
 
 ## Tech Stack
 - Go
